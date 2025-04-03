@@ -1,3 +1,85 @@
+# name: Build and Deploy to AWS ECS
+
+# on:
+#   push:
+#     branches: ["main"]
+
+# env:
+#   AWS_REGION: eu-north-1
+#   ECR_REPOSITORY: sumer-frontend
+#   ECS_SERVICE: sumer-frontend-service
+#   ECS_CLUSTER: sumer-sumer-sbx-api-apiecscluster
+#   ECS_TASK_DEFINITION: sumer-frontend-task-definition
+#   CONTAINER_NAME: sumer-frontend-container
+
+# permissions:
+#   contents: read
+
+# jobs:
+#   build-and-deploy:
+#     name: Build and Deploy to ECS
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "18"
+#           cache: "npm"
+
+#       - name: Install Dependencies
+#         run: npm ci
+
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ env.AWS_REGION }}
+
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v2
+
+#       - name: Build, tag, and push Docker image
+#         id: build-image
+#         env:
+#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#           IMAGE_TAG: latest
+#         run: |
+#           echo "Building Docker image..."
+#           docker build --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+
+#           echo "Pushing Docker image to ECR..."
+#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+#       # Download current task definition
+#       - name: Download task definition
+#         run: |
+#           aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} \
+#           --query taskDefinition > task-definition.json
+
+#       # Update the task definition with the new image
+#       - name: Fill in the new image ID in the Amazon ECS task definition
+#         id: task-def
+#         uses: aws-actions/amazon-ecs-render-task-definition@v1
+#         with:
+#           task-definition: task-definition.json
+#           container-name: ${{ env.CONTAINER_NAME }}
+#           image: ${{ steps.build-image.outputs.image }}
+
+#       # Deploy the updated task definition to ECS
+#       - name: Deploy Amazon ECS task definition
+#         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+#         with:
+#           task-definition: ${{ steps.task-def.outputs.task-definition }}
+#           service: ${{ env.ECS_SERVICE }}
+#           cluster: ${{ env.ECS_CLUSTER }}
+#           wait-for-service-stability: true
+
 name: Build and Deploy to AWS ECS
 
 on:
@@ -33,6 +115,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      # Optional: Only run type checking, don't fail the pipeline
+      - name: Type Check (Informational)
+        run: npx tsc --noEmit
+        continue-on-error: true
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -44,17 +131,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build, tag, and push Docker image
         id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: latest
-        run: |
-          echo "Building Docker image..."
-          docker build --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-
-          echo "Pushing Docker image to ECR..."
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       # Download current task definition
       - name: Download task definition
@@ -69,7 +157,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: ${{ env.CONTAINER_NAME }}
-          image: ${{ steps.build-image.outputs.image }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
 
       # Deploy the updated task definition to ECS
       - name: Deploy Amazon ECS task definition
