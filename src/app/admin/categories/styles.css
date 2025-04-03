@@ -1,0 +1,42 @@
+.top-bar {
+    margin-top: 80px;
+}
+
+.top-bar h1 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+    color: #495159;
+}
+
+.top-bar p {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #495159;
+}
+
+.top-bar button {
+    float: right;
+    background: #ED6E1F;
+    border-radius: 10px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    height: 45px;
+    width: 180px;
+}
+
+.top-bar button:hover{
+    background: #26a6df;
+    transition: ease-in .3s;
+}

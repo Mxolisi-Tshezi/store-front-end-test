@@ -1,0 +1,36 @@
+.categories-section {
+    border-radius: 10px;
+    border: 2px solid #8B8B8B;
+}
+
+.categories-section h1 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    color: #656565;
+    padding: 20px;
+}
+
+.categories-list li {
+    border-bottom: 0.5px solid #8B8B8B;
+    padding: 10px 50px 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #495159;
+    cursor: pointer;
+}
+
+.categories-list li:first-child {
+    border-top: 0.5px solid #8B8B8B;
+}
+
+.categories-list li:last-child {
+    border-bottom: 0;
+}

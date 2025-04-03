@@ -1,0 +1,95 @@
+/* General Reset */
+
+header {
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* 🔹 Top Bar */
+.top-bar {
+    background-color: #114D83;
+    color: white;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.icons {
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+}
+
+.icons-text {
+    display: flex;
+    align-items: center;
+}
+
+.icons-text span {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+/* 🔹 Main Header */
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: white;
+}
+
+/* Logo */
+.logo img {
+    height: 50px;
+}
+
+/* Navigation Menu */
+.menu ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.menu ul li {
+    display: inline-block;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    color: #114D83;
+}
+
+/* Search Box */
+.search input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 230px;
+    border: 1px solid #114D83;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 16px;
+    color: #114D83;
+}
+
+.search input::placeholder{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 16px;
+    color: #114D83;
+}

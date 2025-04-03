@@ -1,0 +1,39 @@
+[
+    {
+      "brandName": "Apple",
+      "productName": "iPhone 16",
+      "productImage": "/productimage1.png",
+      "productPrice": "R19,999"
+    },
+    {
+      "brandName": "Apple",
+      "productName": "iPhone 15 Pro Max",
+      "productImage": "/productimage2.png",
+      "productPrice": "R23,999"
+    },
+    {
+      "brandName": "Huawei",
+      "productName": "Nova Y72",
+      "productImage": "/productimage3.png",
+      "productPrice": "R14,999"
+    },
+    {
+      "brandName": "Apple",
+      "productName": "Series 9",
+      "productImage": "/productimage4.png",
+      "productPrice": "R6,999"
+    },
+    {
+      "brandName": "Samsung",
+      "productName": "S22",
+      "productImage": "/productimage5.png",
+      "productPrice": "R22,999"
+    },
+    {
+      "brandName": "Huawei",
+      "productName": "X2 Mate",
+      "productImage": "/productimage6.png",
+      "productPrice": "R6,999"
+    }
+  ]
+  
