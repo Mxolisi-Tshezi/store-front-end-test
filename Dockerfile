@@ -105,9 +105,8 @@ COPY . .
 #     find src/app/\(main\) -name "*.tsx" -type f -exec dos2unix {} \;
 
 RUN apk add --no-cache dos2unix && \
-    find src/app/\(main\) -name "*.tsx" -type f -exec dos2unix {} \; && \
-    find src/app/admin -name "*.tsx" -type f -exec dos2unix {} \;
-
+    find src -name "*.tsx" -type f -exec dos2unix {} \; && \
+    find src -name "*.ts" -type f -exec dos2unix {} \;
 
 # Build the Next.js application with linting disabled
 RUN npm run build -- --no-lint
