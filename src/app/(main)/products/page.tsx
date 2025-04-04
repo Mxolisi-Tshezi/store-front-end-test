@@ -1,12 +1,6 @@
-import React from 'react';
+// products/page.tsx
+"use client";
 
-const ProductsPage = () => {
-    return (
-        <div>
-            <h1>Products</h1>
-            <p>Welcome to the products page. Browse our collection below!</p>
-        </div>
-    );
-};
-
-export default ProductsPage;
+export default function ProductsPage() {
+    return <div>Products Page</div>;
+}

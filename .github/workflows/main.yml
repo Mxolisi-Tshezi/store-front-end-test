@@ -33,21 +33,6 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      # Create necessary empty files for TypeScript
-      - name: Create empty TypeScript files
-        run: |
-          mkdir -p src/app/\(main\)/cart
-          echo '"use client";\n\nexport default function CartPage() {\n  return <div>Cart Page</div>;\n}' > src/app/\(main\)/cart/page.tsx
-          mkdir -p src/app/\(main\)/contact
-          echo '"use client";\n\nexport default function ContactPage() {\n  return <div>Contact Page</div>;\n}' > src/app/\(main\)/contact/page.tsx
-          mkdir -p src/app/\(main\)/products
-          echo '"use client";\n\nexport default function ProductsPage() {\n  return <div>Products Page</div>;\n}' > src/app/\(main\)/products/page.tsx
-
-      # TypeScript check (informational only)
-      - name: Type Check (Informational)
-        run: npx tsc --noEmit
-        continue-on-error: true
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
