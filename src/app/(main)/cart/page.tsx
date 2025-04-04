@@ -1,5 +1,12 @@
 "use client";
 
-export default function CartPage() {
-    return <div>Cart Page</div>;
+import React from 'react';
+
+export default function cartPage() {
+    return (
+        <div>
+            <h1>Add Products</h1>
+            {/* Your add products form and functionality here */}
+        </div>
+    );
 }

@@ -1,123 +1,161 @@
 .filter-title {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-    color: #656565;
-    margin: 10px 0;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #656565;
+  margin: 10px 0;
 }
 
 .filter-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
 }
 
 .filter-heading h2 {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 20px;
-    color: #495159;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #495159;
 }
 
-.filter-heading img{
-    padding-right: 20px;
+.filter-heading img {
+  padding-right: 20px;
 }
 
-.filter-child{
-    padding: 10px 0 25px 0;
+.filter-child {
+  padding: 10px 0 25px 0;
 }
 
 .input-wrapper {
-    display: flex;
-    gap: 10px;
-    padding: 7px 0;
+  display: flex;
+  gap: 10px;
+  padding: 7px 0;
 }
 
 .input-wrapper input {
-    width: 18px;
+  width: 18px;
 }
 
 .input-wrapper span {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: #495159;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #495159;
 }
+/* Keep your existing styles */
+
 .slider-container {
-    position: relative;
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    margin-top: 25px;
-  }
-  
-  .slider {
-    width: 100%;
-    height: 4px;
-    background: #4b5563;
-    border-radius: 5px;
-    appearance: none;
-    outline: none;
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-  }
-  
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-  }
-  
-  /* Tooltip */
-  .tooltip {
-    position: absolute;
-    top: -25px;
-    background: #333;
-    color: #fff;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    text-align: center;
-    transition: left 0.1s linear;
-  }
-  
-  .tooltip-arrow {
-    position: absolute;
-    left: 50%;
-    bottom: -5px;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #333;
-    transform: translateX(-50%);
-  }
-  
-  /* Orange Knob */
-  .slider-knob {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #ea580c;
-    border-radius: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    transition: left 0.1s linear;
-    pointer-events: none;
-    z-index: 2;
-  }
-  
+  position: relative;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  justify-content: center;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #4b5563;
+  border-radius: 5px;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  pointer-events: auto; /* Ensure both sliders are interactive */
+}
+
+/* Ensure min slider is interactive */
+.slider-min {
+  z-index: 3;
+  pointer-events: auto;
+}
+
+/* Ensure max slider is interactive */
+.slider-max {
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* Styling the slider knobs */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #ea580c;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 4;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #ea580c;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 4;
+}
+
+
+/* Updated CSS */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  justify-content: center;
+}
+
+/* The track background */
+.slider-track {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #4b5563;
+  border-radius: 5px;
+}
+
+/* Both sliders should be on top of the track */
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  appearance: none;
+  outline: none;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Make the thumbs clickable */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #ea580c;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #ea580c;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+}
